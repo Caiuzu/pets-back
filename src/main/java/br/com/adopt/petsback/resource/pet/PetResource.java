@@ -1,6 +1,6 @@
 package br.com.adopt.petsback.resource.pet;
 
-import br.com.adopt.petsback.domain.dto.PetDto;
+import br.com.adopt.petsback.domain.dto.PetResponseDto;
 import br.com.adopt.petsback.service.PetService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -19,7 +19,7 @@ public class PetResource {
     private final PetService petService;
 
     @GetMapping
-    public ResponseEntity<List<PetDto>> getAll() {
+    public ResponseEntity<List<PetResponseDto>> getAll() {
         return ResponseEntity.status(HttpStatus.OK).body(petService.findAll());
     }
 
