@@ -1,5 +1,6 @@
 package br.com.adopt.petsback.service;
 
+import br.com.adopt.petsback.domain.dto.PetRequestDto;
 import br.com.adopt.petsback.domain.dto.PetResponseDto;
 import br.com.adopt.petsback.domain.entity.Pet;
 import br.com.adopt.petsback.repository.PetRepository;
@@ -19,6 +20,12 @@ public class PetService {
     public List<PetResponseDto> findAll() {
         final List<Pet> pets = petRepository.findAll();
         return pets.stream().map(petBuilder::toPetResponseDto).toList();
+    }
+
+    public PetResponseDto create(PetRequestDto petRequestDto) {
+        var petToCreate = petBuilder.toPet(petRequestDto);
+        var createdPet = petRepository.save(petToCreate);
+        return petBuilder.toPetResponseDto(createdPet);
     }
 
 }
